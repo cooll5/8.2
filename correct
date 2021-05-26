@@ -1,0 +1,31 @@
+#include <iostream>
+#include <string>
+using namespace std;
+string Task(string str)
+{
+    string res = "";
+    int firstscope = str.find_first_of('(',0);
+    int nestedscopeopen = str.find('(',firstscope+1);
+    int nestedclosescope = str.find(')',nestedscopeopen);
+    int lastscope = str.find(')', nestedclosescope+1);
+    for (size_t i = 0; i < str.size(); i++)
+    {
+        if (i < firstscope)
+            res.push_back(str[i]);
+        if (i > nestedscopeopen && i < nestedclosescope)
+            res.push_back(str[i]);
+        if (i > lastscope)
+            res.push_back(str[i]);
+    }
+    return res;
+}
+
+int main()
+{
+    string s;
+    getline(cin, s);
+    cout << "\n\n" << Task(s) << endl;
+
+    system("pause");
+    return 0;
+}
